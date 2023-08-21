@@ -12,7 +12,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
+*.properties
 settings.gradle
 gradle/wrapper
 gradlew
