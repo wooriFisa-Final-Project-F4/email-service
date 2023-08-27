@@ -77,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
         .replace("{{productName}}", emailEvent.getProductName())
         .replace("{{productImage}}", emailEvent.getProductImage())
         .replace("{{artist}}", emailEvent.getArtist())
-        .replace("{{bidPrice}}", emailEvent.getBidPrice())
+        .replace("{{bidPrice}}", emailEvent.getAuctionPrice())
         .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime());
   }
 

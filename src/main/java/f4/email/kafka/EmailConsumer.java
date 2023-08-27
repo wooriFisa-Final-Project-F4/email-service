@@ -20,10 +20,10 @@ public class EmailConsumer {
       topics = "${spring.kafka.topic.name}",
       groupId = "${spring.kafka.consumer.group-id}")
   public void consume(EmailEvent event) {
+    emailService.sendSuccessfulBid(event);
     LOGGER.info(
         String.format(
-            "[%s] Email event received in email service and send email => %s",
+            "[%s] Email event received in email service and send email to => %s",
             LocalDateTime.now(), event.getUserEmail()));
-    emailService.sendSuccessfulBid(event);
   }
 }
