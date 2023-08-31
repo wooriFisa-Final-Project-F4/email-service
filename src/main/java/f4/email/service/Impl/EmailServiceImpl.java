@@ -9,7 +9,7 @@ import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import f4.email.constant.CustomErrorCode;
 import f4.email.constant.EmailTemplate;
-import f4.email.dto.EmailEvent;
+import f4.email.dto.EndedAuctionEvent;
 import f4.email.exception.CustomException;
 import f4.email.service.EmailService;
 import f4.email.util.UUIDGenerator;
@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
 
   // 낙찰 알림 이메일을 전송하는 메서드
   @Override
-  public void sendSuccessfulBid(EmailEvent event) {
+  public void sendSuccessfulBid(EndedAuctionEvent event) {
     String htmlContent =
         loadAndReplaceTemplate(EmailTemplate.SUCCESSFUL_BID_EMAIL_TEMPLATE.getValue(), event);
     sendEmail(
@@ -70,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
   }
 
   // 템플릿을 불러오고, 해당 템플릿 내용을 BidRequestDto에 따라 바꿔주는 메서드
-  private String loadAndReplaceTemplate(String templateFileName, EmailEvent emailEvent) {
+  private String loadAndReplaceTemplate(String templateFileName, EndedAuctionEvent emailEvent) {
     String htmlContent = loadHtmlTemplate(templateFileName);
     return htmlContent
         .replace("{{username}}", emailEvent.getUsername())
@@ -78,7 +78,7 @@ public class EmailServiceImpl implements EmailService {
         .replace("{{productImage}}", emailEvent.getProductImage())
         .replace("{{artist}}", emailEvent.getArtist())
         .replace("{{bidPrice}}", emailEvent.getAuctionPrice())
-        .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime());
+        .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime().toString());
   }
 
   // 템플릿을 불러오고, 특정 플레이스홀더를 원하는 값으로 바꿔주는 메서드

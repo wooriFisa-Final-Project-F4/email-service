@@ -1,6 +1,6 @@
 package f4.email.kafka;
 
-import f4.email.dto.EmailEvent;
+import f4.email.dto.EndedAuctionEvent;
 import f4.email.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -16,14 +16,12 @@ public class EmailConsumer {
   private static final Logger LOGGER = LoggerFactory.getLogger(EmailConsumer.class);
   private EmailService emailService;
 
-  @KafkaListener(
-      topics = "${spring.kafka.topic.name}",
-      groupId = "${spring.kafka.consumer.group-id}")
-  public void consume(EmailEvent event) {
+  @KafkaListener(topics = "${spring.kafka.topic}", groupId = "${spring.kafka.consumer.group-id}")
+  public void consume(EndedAuctionEvent event) {
     emailService.sendSuccessfulBid(event);
     LOGGER.info(
         String.format(
-            "[%s] Email event received in email service and send email to => %s",
-            LocalDateTime.now(), event.getUserEmail()));
+            "[%s] [%s] event received in email service and send email to => %s",
+            LocalDateTime.now(), event, event.getUserEmail()));
   }
 }
