@@ -1,11 +1,10 @@
 package f4.email.service;
 
-import f4.email.dto.EmailEvent;
+import f4.email.dto.EndedAuctionEvent;
 
 public interface EmailService {
 
   void sendAuthenticationCode(String email);
 
-  void sendSuccessfulBid(EmailEvent emailEvent);
-
+  void sendSuccessfulBid(EndedAuctionEvent emailEvent);
 }
