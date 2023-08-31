@@ -1,22 +1,17 @@
-# Created by https://www.toptal.com/developers/gitignore/api/macos,windows,intellij,gradle,java
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,intellij,gradle,java
+# Created by https://www.toptal.com/developers/gitignore/api/macos,windows,java,intellij,gradle
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,java,intellij,gradle
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-*.properties
-settings.gradle
-gradle/wrapper
-gradlew
-gradlew.bat
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -231,4 +226,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,windows,intellij,gradle,java
+# End of https://www.toptal.com/developers/gitignore/api/macos,windows,java,intellij,gradle
+/.idea/
+/gradle/
+/src/main/resources/application.properties
