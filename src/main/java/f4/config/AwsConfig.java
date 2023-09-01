@@ -1,4 +1,4 @@
-package f4.email.config;
+package f4.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

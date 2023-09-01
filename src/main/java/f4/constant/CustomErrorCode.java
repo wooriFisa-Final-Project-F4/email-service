@@ -1,4 +1,4 @@
-package f4.email.constant;
+package f4.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package f4.email.service.Impl;
+package f4.service.Impl;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
@@ -7,12 +7,12 @@ import com.amazonaws.services.simpleemail.model.Content;
 import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import f4.email.constant.CustomErrorCode;
-import f4.email.constant.EmailTemplate;
-import f4.email.dto.EndedAuctionEvent;
-import f4.email.exception.CustomException;
-import f4.email.service.EmailService;
-import f4.email.util.UUIDGenerator;
+import f4.constant.EmailTemplate;
+import f4.constant.CustomErrorCode;
+import f4.dto.EndedAuctionEvent;
+import f4.exception.CustomException;
+import f4.service.EmailService;
+import f4.util.UUIDGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -75,10 +75,11 @@ public class EmailServiceImpl implements EmailService {
     return htmlContent
         .replace("{{username}}", emailEvent.getUsername())
         .replace("{{productName}}", emailEvent.getProductName())
-        .replace("{{productImage}}", emailEvent.getProductImage())
+        .replace("{{productImage}}", emailEvent.getImage())
         .replace("{{artist}}", emailEvent.getArtist())
-        .replace("{{bidPrice}}", emailEvent.getAuctionPrice())
-        .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime().toString());
+        .replace(
+            "{{bidPrice}}", emailEvent.getAuctionPrice().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ","))
+        .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime().toString().split("T")[0]);
   }
 
   // 템플릿을 불러오고, 특정 플레이스홀더를 원하는 값으로 바꿔주는 메서드

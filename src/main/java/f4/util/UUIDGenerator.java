@@ -1,4 +1,4 @@
-package f4.email.util;
+package f4.util;
 
 import java.util.UUID;
 

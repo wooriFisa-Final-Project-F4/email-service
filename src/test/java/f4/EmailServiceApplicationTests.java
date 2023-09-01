@@ -1,4 +1,4 @@
-package f4.email;
+package f4;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

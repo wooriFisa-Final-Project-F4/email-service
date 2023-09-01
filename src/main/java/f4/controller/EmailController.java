@@ -1,6 +1,6 @@
-package f4.email.controller;
+package f4.controller;
 
-import f4.email.service.EmailService;
+import f4.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

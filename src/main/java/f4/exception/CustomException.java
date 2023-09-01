@@ -1,6 +1,6 @@
-package f4.email.exception;
+package f4.exception;
 
-import f4.email.constant.CustomErrorCode;
+import f4.constant.CustomErrorCode;
 import lombok.Getter;
 
 @Getter

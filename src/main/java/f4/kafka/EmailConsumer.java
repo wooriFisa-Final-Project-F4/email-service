@@ -1,7 +1,7 @@
-package f4.email.kafka;
+package f4.kafka;
 
-import f4.email.dto.EndedAuctionEvent;
-import f4.email.service.EmailService;
+import f4.dto.EndedAuctionEvent;
+import f4.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
-package f4.email.service;
+package f4.service;
 
-import f4.email.dto.EndedAuctionEvent;
+import f4.dto.EndedAuctionEvent;
 
 public interface EmailService {
 

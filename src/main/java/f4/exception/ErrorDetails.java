@@ -1,4 +1,4 @@
-package f4.email.exception;
+package f4.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
