@@ -11,9 +11,12 @@ import f4.constant.EmailTemplate;
 import f4.constant.CustomErrorCode;
 import f4.dto.EndedAuctionEvent;
 import f4.exception.CustomException;
+import f4.redis.RedisService;
 import f4.service.EmailService;
 import f4.util.UUIDGenerator;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.cache.CacheProperties.Redis;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +27,10 @@ import java.nio.file.Paths;
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
+
   private final AmazonSimpleEmailService amazonSimpleEmailService;
   private final ResourceLoader resourceLoader;
+  private final RedisService redisService;
 
   // 인증 코드를 전송하는 메서드
   @Override
@@ -36,6 +41,8 @@ public class EmailServiceImpl implements EmailService {
             EmailTemplate.AUTHENTICATION_CODE_EMAIL_TEMPLATE.getValue(),
             "{{number}}",
             authenticationCode);
+
+    redisService.setDataExpire(email, authenticationCode, Duration.ofMillis(1000 * 60 * 3));
     sendEmail(email, EmailTemplate.AUTHENTICATION_CODE_EMAIL_SUBJECT.getValue(), htmlContent);
   }
 
