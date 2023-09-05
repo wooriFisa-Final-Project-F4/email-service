@@ -16,20 +16,17 @@ import f4.service.EmailService;
 import f4.util.UUIDGenerator;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.Redis;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
   private final AmazonSimpleEmailService amazonSimpleEmailService;
-  private final ResourceLoader resourceLoader;
   private final RedisService redisService;
 
   // 인증 코드를 전송하는 메서드
@@ -98,10 +95,14 @@ public class EmailServiceImpl implements EmailService {
 
   // 템플릿 파일을 불러오는 메서드
   private String loadHtmlTemplate(String templateFileName) {
-    String templatePath = EmailTemplate.TEMPLATE_PATH.getValue() + templateFileName;
     try {
-      return new String(
-          Files.readAllBytes(Paths.get(resourceLoader.getResource(templatePath).getURI())));
+      ClassLoader classLoader = getClass().getClassLoader();
+      InputStream inputStream =
+          classLoader.getResourceAsStream("templates/" + templateFileName);
+      if (inputStream == null) {
+        throw new CustomException(CustomErrorCode.EMAIL_TEMPLATE_LOADING_FAILED);
+      }
+      return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException e) {
       throw new CustomException(CustomErrorCode.EMAIL_TEMPLATE_LOADING_FAILED);
     }
