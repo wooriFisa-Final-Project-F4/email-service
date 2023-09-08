@@ -15,7 +15,7 @@ import javax.validation.constraints.Email;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
+@RequestMapping("/email/v1")
 public class EmailController {
 
   private final EmailService emailService;
