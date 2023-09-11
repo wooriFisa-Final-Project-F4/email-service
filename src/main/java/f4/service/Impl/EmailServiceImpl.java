@@ -16,20 +16,17 @@ import f4.service.EmailService;
 import f4.util.UUIDGenerator;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.Redis;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
   private final AmazonSimpleEmailService amazonSimpleEmailService;
-  private final ResourceLoader resourceLoader;
   private final RedisService redisService;
 
   // 인증 코드를 전송하는 메서드
@@ -37,10 +34,10 @@ public class EmailServiceImpl implements EmailService {
   public void sendAuthenticationCode(String email) {
     String authenticationCode = UUIDGenerator.generate();
     String htmlContent =
-        loadAndReplaceTemplate(
-            EmailTemplate.AUTHENTICATION_CODE_EMAIL_TEMPLATE.getValue(),
-            "{{number}}",
-            authenticationCode);
+     loadAndReplaceTemplate(
+      EmailTemplate.AUTHENTICATION_CODE_EMAIL_TEMPLATE.getValue(),
+      "{{number}}",
+      authenticationCode);
 
     redisService.setDataExpire(email, authenticationCode, Duration.ofMillis(1000 * 60 * 3));
     sendEmail(email, EmailTemplate.AUTHENTICATION_CODE_EMAIL_SUBJECT.getValue(), htmlContent);
@@ -50,9 +47,9 @@ public class EmailServiceImpl implements EmailService {
   @Override
   public void sendSuccessfulBid(EndedAuctionEvent event) {
     String htmlContent =
-        loadAndReplaceTemplate(EmailTemplate.SUCCESSFUL_BID_EMAIL_TEMPLATE.getValue(), event);
+     loadAndReplaceTemplate(EmailTemplate.SUCCESSFUL_BID_EMAIL_TEMPLATE.getValue(), event);
     sendEmail(
-        event.getUserEmail(), EmailTemplate.SUCCESSFUL_BID_EMAIL_SUBJECT.getValue(), htmlContent);
+     event.getUserEmail(), EmailTemplate.SUCCESSFUL_BID_EMAIL_SUBJECT.getValue(), htmlContent);
   }
 
   // 이메일을 전송하는 메서드
@@ -68,40 +65,44 @@ public class EmailServiceImpl implements EmailService {
   // 이메일 요청 객체를 생성하는 메서드
   private SendEmailRequest createEmailRequest(String toEmail, String subject, String htmlContent) {
     return new SendEmailRequest()
-        .withSource(EmailTemplate.SOURCE_EMAIL.getValue())
-        .withDestination(new Destination().withToAddresses(toEmail))
-        .withMessage(
-            new Message()
-                .withSubject(new Content().withData(subject))
-                .withBody(new Body().withHtml(new Content().withData(htmlContent))));
+     .withSource(EmailTemplate.SOURCE_EMAIL.getValue())
+     .withDestination(new Destination().withToAddresses(toEmail))
+     .withMessage(
+      new Message()
+       .withSubject(new Content().withData(subject))
+       .withBody(new Body().withHtml(new Content().withData(htmlContent))));
   }
 
   // 템플릿을 불러오고, 해당 템플릿 내용을 BidRequestDto에 따라 바꿔주는 메서드
   private String loadAndReplaceTemplate(String templateFileName, EndedAuctionEvent emailEvent) {
     String htmlContent = loadHtmlTemplate(templateFileName);
     return htmlContent
-        .replace("{{username}}", emailEvent.getUsername())
-        .replace("{{productName}}", emailEvent.getProductName())
-        .replace("{{productImage}}", emailEvent.getImage())
-        .replace("{{artist}}", emailEvent.getArtist())
-        .replace(
-            "{{bidPrice}}", emailEvent.getAuctionPrice().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ","))
-        .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime().toString().split("T")[0]);
+     .replace("{{username}}", emailEvent.getUsername())
+     .replace("{{productName}}", emailEvent.getProductName())
+     .replace("{{productImage}}", emailEvent.getImage())
+     .replace("{{artist}}", emailEvent.getArtist())
+     .replace(
+      "{{bidPrice}}", emailEvent.getAuctionPrice().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ","))
+     .replace("{{auctionEndTime}}", emailEvent.getAuctionEndTime().toString().split("T")[0]);
   }
 
   // 템플릿을 불러오고, 특정 플레이스홀더를 원하는 값으로 바꿔주는 메서드
   private String loadAndReplaceTemplate(
-      String templateFileName, String placeholder, String replacement) {
+   String templateFileName, String placeholder, String replacement) {
     String htmlContent = loadHtmlTemplate(templateFileName);
     return htmlContent.replace(placeholder, replacement);
   }
 
   // 템플릿 파일을 불러오는 메서드
   private String loadHtmlTemplate(String templateFileName) {
-    String templatePath = EmailTemplate.TEMPLATE_PATH.getValue() + templateFileName;
     try {
-      return new String(
-          Files.readAllBytes(Paths.get(resourceLoader.getResource(templatePath).getURI())));
+      ClassLoader classLoader = getClass().getClassLoader();
+      InputStream inputStream =
+       classLoader.getResourceAsStream("templates/" + templateFileName);
+      if (inputStream == null) {
+        throw new CustomException(CustomErrorCode.EMAIL_TEMPLATE_LOADING_FAILED);
+      }
+      return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException e) {
       throw new CustomException(CustomErrorCode.EMAIL_TEMPLATE_LOADING_FAILED);
     }
