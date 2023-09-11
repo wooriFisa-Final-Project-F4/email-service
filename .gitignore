@@ -128,7 +128,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.nar
 *.ear
@@ -228,5 +228,4 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,java,intellij,gradle
 /.idea/
-/gradle/
-/src/main/resources/application.properties
+#/gradle/
