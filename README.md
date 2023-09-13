@@ -24,7 +24,7 @@ Spring Cloud 프로젝트입니다. 이 프로젝트는 다음과 같은 주요 
 
 ### 낙찰 알림 이메일
 
-ArteModerni 웹사이트는 [auction-status-updater]를 이용해 매일 자정 경매가 끝난 상품에 대해 상태를 업데이트 하면서 낙찰자를 확인하여 관련 정보로 이벤트를 발행합니다. email-service는 해당 이벤트를 구독하고 있다가, 이벤트 발행에 맞춰 낙찰 알림을 전송합니다.
+ArteModerni 웹사이트는 [auction-status-updater](https://github.com/wooriFisa-Final-Project-F4/auction-status-updater)를 이용해 매일 자정 경매가 끝난 상품에 대해 상태를 업데이트 하면서 낙찰자를 확인하여 관련 정보로 이벤트를 발행합니다. email-service는 해당 이벤트를 구독하고 있다가, 이벤트 발행에 맞춰 낙찰 알림을 전송합니다.
 
 <details>
 <summary>템플릿 펼치기/접기</summary>
