@@ -43,6 +43,7 @@ ArteModerni 웹사이트는 [auction-status-updater]를 이용해 매일 자정 
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="redis" width="40" height="40"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="spring" width="40" height="40"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="java" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" width="40" height="40"/>
 </p>
 
 ## Mechanism
@@ -50,13 +51,3 @@ ArteModerni 웹사이트는 [auction-status-updater]를 이용해 매일 자정 
 ### Project Architecture
 
 <img width="1618" alt="Architect (2) 복사본" src="https://github.com/wooriFisa-Final-Project-F4/.github/assets/109801772/27ac2b1d-8624-424f-aefb-4ceda4484b63">
-
-## 참여자/기여자 목록
-
-|                                                         김지운<br>PM(Project Manager)                                                         |                                                        엄수혁<br>TL(Technical Leader)                                                         |
-| :-------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img alt="김지운" src="https://github.com/Jimoou/Coding-Test/assets/109801772/6bb24ca5-a368-461a-9886-10fac02e7c20" height="100" width="100"> | <img alt="엄수혁" src="https://github.com/Jimoou/Coding-Test/assets/109801772/df375954-fd4b-45ce-b363-d792b02c3400" height="100" width="100"> |
-|                                                     [@Jimoou](https://github.com/Jimoou/)                                                     |                                                [@endlessmomo](https://github.com/endlessmomo)                                                 |
-|                                               나비처럼 날아 벌처럼 쏘는 개발자가 되고 싶습니다.                                               |                                                   항상 궁금증이 가득한 개발자 엄수혁입니다                                                    |
-
----
