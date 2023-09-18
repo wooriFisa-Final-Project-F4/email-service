@@ -37,7 +37,6 @@
 <img width="923" alt="스크린샷 2023-09-12 오후 7 29 09" src="https://github.com/wooriFisa-Final-Project-F4/.github/assets/109801772/d96eab1c-8b42-4c35-b909-8c5456494fa4">
 </details>
 
-<br>
 <details>
 <summary>낙찰 알림 이메일 접기/펼치기</summary>
 <br>ArteModerni 웹사이트는 [auction-status-updater](https://github.com/wooriFisa-Final-Project-F4/auction-status-updater)를 이용해 매일 자정 경매가 끝난 상품에 대해 상태를 업데이트 하면서 낙찰자를 확인하여 관련 정보로 이벤트를 발행합니다.
