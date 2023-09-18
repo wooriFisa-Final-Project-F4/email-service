@@ -40,7 +40,9 @@
 <br>
 <details>
 <summary>낙찰 알림 이메일 접기/펼치기</summary>
-<br>ArteModerni 웹사이트는 [auction-status-updater](https://github.com/wooriFisa-Final-Project-F4/auction-status-updater)를 이용해 매일 자정 경매가 끝난 상품에 대해 상태를 업데이트 하면서 낙찰자를 확인하여 관련 정보로 이벤트를 발행합니다. email-service는 해당 이벤트를 구독하고 있다가, 이벤트 발행에 맞춰 낙찰 알림을 전송합니다.
+<br>ArteModerni 웹사이트는 [auction-status-updater](https://github.com/wooriFisa-Final-Project-F4/auction-status-updater)를 이용해 매일 자정 경매가 끝난 상품에 대해 상태를 업데이트 하면서 낙찰자를 확인하여 관련 정보로 이벤트를 발행합니다.
+  <br>
+  <br>email-service는 해당 이벤트를 구독하고 있다가, 이벤트 발행에 맞춰 낙찰 알림을 전송합니다.<br>
 <img width="1364" alt="스크린샷 2023-09-12 오후 7 09 04" src="https://github.com/wooriFisa-Final-Project-F4/.github/assets/109801772/856bd9ec-d420-46c2-a798-3b723d5656ce">
 </details>
 
